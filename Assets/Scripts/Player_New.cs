@@ -16,6 +16,8 @@ public class Player_New : Character
 	public event DeadEventHandler Dead;
 
 	private IUseable useable;
+
+    public bool isRunning { get; set; }
 		
 	[SerializeField]
 	private Transform[] groundPoints;
@@ -160,6 +162,16 @@ public class Player_New : Character
 
 	private void HandleMovement(float horizontal, float vertical)
 	{
+
+        if (isRunning)
+        {
+            movementSpeed = 5f;
+        }
+        else
+        {
+            movementSpeed = 2f;
+        }
+
 		if (IsFalling) 
 		{
 			gameObject.layer = 11;
@@ -189,10 +201,13 @@ public class Player_New : Character
 			MyAnimator.SetTrigger ("jump");
 			Jump = true;
 		}
-		if (Input.GetKey (KeyCode.LeftShift) && (MyRigidbody.velocity.x > 0)) 
+		if (Input.GetKeyDown (KeyCode.LeftShift) ) 
 		{
+            if (MyRigidbody.velocity.x > 0)
 			MyAnimator.SetTrigger ("run");
-		}	
+            //isRunning = true;
+		}
+
 		if (Input.GetKeyDown (KeyCode.R)) 
 		{
 			MyAnimator.SetTrigger ("attack");

@@ -10,7 +10,7 @@ public class RunBehavior : StateMachineBehaviour {
 		animator.GetComponent<Player_New> ().Run = true;
 
 		animator.SetFloat ("speed", 0);
-
+        Player_New.Instance.isRunning = true;
 		if (animator.tag == "Player") 
 		{
 			Player_New.Instance.MyRigidbody.velocity = Vector2.zero;
@@ -26,6 +26,7 @@ public class RunBehavior : StateMachineBehaviour {
 			animator.GetComponent<Player_New> ().Run = false;
 			animator.SetTrigger ("stopRunning");
 			animator.ResetTrigger ("run");
+            Player_New.Instance.isRunning = false;
 		}
 	}
 
